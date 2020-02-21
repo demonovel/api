@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["index.ts"],"names":[],"mappings":";AAAA;;GAEG;;;;;AAEH,qDAA2B;AAE3B,kBAAe,eAAG,CAAC,MAAM,CAAC,OAAO,CAAC,GAAG,CAAC,IAAI,IAAI,EAAE,CAAC,CAAC","sourcesContent":["/**\n * Created by user on 2020/2/21.\n */\n\nimport app from '../index';\n\nexport default app.listen(process.env.PORT || 80);\n"]}
