@@ -9,7 +9,7 @@ console.dir(body)
 console.dir(body.toString())
 
 let server = `http://localhost:3001`;
-//server = `https://api-file-server.now.sh`;
+server = `https://api-file-server.now.sh`;
 
 Bluebird
 	.resolve(fetch(`${server}/db/file/dmzj/8daa1a0c`, {
