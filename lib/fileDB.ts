@@ -27,8 +27,13 @@ export default {
 	{
 		return readJSON(resolvePath(siteID, hashID))
 	},
-	async set(siteID: string, hashID: string, data: object)
+	async set(siteID: string, hashID: string, data: any)
 	{
+		if (!data || !data.href)
+		{
+			return Promise.reject(new TypeError(`${data} is not allow`));
+		}
+
 		return outputJSON(resolvePath(siteID, hashID), data)
 			.then(e => data)
 			;

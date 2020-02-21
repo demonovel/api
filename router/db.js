@@ -20,14 +20,14 @@ exports.default = () => {
         }
         return p
             .then(data => res.json({
-            timestamp: Date.now(),
             error: false,
+            timestamp: Date.now(),
             data,
         }))
             .catch(e => res.status(400).json({
             error: true,
-            message: String(e),
             timestamp: Date.now(),
+            message: String(e),
         }));
     });
     return router;

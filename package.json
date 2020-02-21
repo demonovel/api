@@ -1,5 +1,6 @@
 {
   "name": "api-file-server",
+  "private": true,
   "version": "1.0.0",
   "description": "<description>",
   "homepage": "https://github.com/demonovel/api-file-server#readme",
