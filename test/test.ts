@@ -8,15 +8,24 @@ body.set('href', 'https://www.itread01.com/content/1545341432.html');
 console.dir(body)
 console.dir(body.toString())
 
+let server = `http://localhost:3001`;
+//server = `https://api-file-server.now.sh`;
+
 Bluebird
-	.resolve(fetch(`http://localhost:3001/db/file/111/222`, {
+	.resolve(fetch(`${server}/db/file/dmzj/8daa1a0c`, {
 		method: 'POST',
 		body
 	}))
 	.tap(e => e.status > 400 && Promise.reject(e))
 	.tapCatch(e => console.error(e))
 	.tap(async (e) => (console.log(e), console.log(await e.json())))
+	.finally(() => {
+		return fetch(`${server}/db/file/dmzj/8daa1a0c`)
+			.then(async (v) => console.log(await v.text()))
+	})
 ;
+
+
 
 export function fetch(...argv: Parameters<typeof _fetch>)
 {

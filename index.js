@@ -17,7 +17,7 @@ app.use('/file/', file_1.default());
 app.use('/db/', db_1.default());
 app.use('/*', (req, res, next) => {
     let { path, baseUrl } = req;
-    res.json({
+    res.status(404).json({
         error: true,
         timestamp: Date.now(),
         baseUrl,

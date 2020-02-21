@@ -1,7 +1,7 @@
-import { resolve } from "path";
+import { resolve, join } from "path";
 import { readJSON, outputJSON } from 'fs-extra';
 
-let cacheRoot = resolve(__dirname, '..', '.cache', 'file');
+let cacheRoot = process.env.IS_REMOTE ? join('/tmp', '.cache', 'file') : resolve(__dirname, '..', '.cache', 'file');
 
 function checkPath(targetPath: string)
 {

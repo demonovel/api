@@ -18,7 +18,7 @@ app.use('/*', (req, res, next) => {
 
 	let { path, baseUrl } = req;
 
-	res.json({
+	res.status(404).json({
 		error: true,
 		timestamp: Date.now(),
 		baseUrl,
