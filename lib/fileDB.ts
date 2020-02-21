@@ -31,7 +31,7 @@ export default {
 	{
 		if (!data || !data.href)
 		{
-			return Promise.reject(new TypeError(`${data} is not allow`));
+			return Promise.reject(new TypeError(`${JSON.stringify(data)} is not allow`));
 		}
 
 		return outputJSON(resolvePath(siteID, hashID), data)

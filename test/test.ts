@@ -9,12 +9,17 @@ console.dir(body)
 console.dir(body.toString())
 
 let server = `http://localhost:3001`;
-server = `https://api-file-server.now.sh`;
+//server = `https://api-file-server.now.sh`;
+server = `http://localhost:3000`;
 
 Bluebird
 	.resolve(fetch(`${server}/db/file/dmzj/8daa1a0c`, {
 		method: 'POST',
-		body
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({a: 1, b: 'Textual content'})
 	}))
 	.tap(e => e.status > 400 && Promise.reject(e))
 	.tapCatch(e => console.error(e))
