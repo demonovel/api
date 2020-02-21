@@ -12,7 +12,7 @@
     "url": "git+https://github.com/demonovel/api-file-server.git"
   },
   "engines": {
-    "node": "node",
+    "node": "^13",
     "yarn": "1.22.0"
   },
   "license": "ISC",
