@@ -1,0 +1,1 @@
+{"version":3,"file":"db.js","sourceRoot":"","sources":["db.ts"],"names":[],"mappings":";;;;;AAAA;;GAEG;AACH,wDAAgC;AAEhC,kBAAe,iBAAO,CAAC","sourcesContent":["/**\n * Created by user on 2020/3/2.\n */\nimport mixinDB from './mixinDB';\n\nexport default mixinDB;\n"]}

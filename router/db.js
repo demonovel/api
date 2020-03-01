@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const fileDB_1 = __importDefault(require("../lib/fileDB"));
+const db_1 = __importDefault(require("../lib/db"));
 exports.default = () => {
     const router = express_1.Router();
     router.all('/file/:siteID/:hashID', async (req, res, next) => {
@@ -13,10 +13,10 @@ exports.default = () => {
         //console.log(req);
         //console.log(req.method, req.params, req.body);
         if (req.method === 'POST' || req.method === 'PUT') {
-            p = fileDB_1.default.set(siteID, hashID, req.body);
+            p = db_1.default.set(siteID, hashID, req.body);
         }
         else {
-            p = fileDB_1.default.get(siteID, hashID);
+            p = db_1.default.get(siteID, hashID);
         }
         return p
             .then(data => res.json({
@@ -28,7 +28,8 @@ exports.default = () => {
             error: true,
             timestamp: Date.now(),
             message: String(e),
-        }));
+        }))
+            .finally(() => db_1.default.stop());
     });
     return router;
 };

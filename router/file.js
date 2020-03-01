@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const fileDB_1 = __importDefault(require("../lib/fileDB"));
+const db_1 = __importDefault(require("../lib/db"));
 exports.default = () => {
     const router = express_1.Router();
     router.use('/:siteID/:hashID', async (req, res, next) => {
         let { siteID, hashID } = req.params;
-        let ok = await fileDB_1.default.get(siteID, hashID)
+        let ok = await db_1.default.get(siteID, hashID)
             .then(data => {
             if (data.href) {
                 let url = new URL(data.href);
@@ -19,7 +19,8 @@ exports.default = () => {
                 }
             }
         })
-            .catch(e => null);
+            .catch(e => null)
+            .finally(() => db_1.default.stop());
         if (ok) {
             return;
         }

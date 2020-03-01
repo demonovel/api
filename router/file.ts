@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { readJSON } from 'fs-extra';
 import { resolve } from 'path';
-import fileDB from '../lib/fileDB';
+import siteDB from '../lib/db';
 
 export default () =>
 {
@@ -11,7 +11,7 @@ export default () =>
 	{
 		let { siteID, hashID } = req.params;
 
-		let ok = await fileDB.get(siteID, hashID)
+		let ok = await siteDB.get(siteID, hashID)
 			.then(data =>
 			{
 				if (data.href)
@@ -26,6 +26,7 @@ export default () =>
 				}
 			})
 			.catch(e => null)
+			.finally(() => siteDB.stop())
 		;
 
 		if (ok)

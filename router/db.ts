@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 import { readJSON } from 'fs-extra';
 import { resolve } from 'path';
-import fileDB from '../lib/fileDB';
+import siteDB from '../lib/db';
 
 export default () =>
 {
@@ -18,11 +18,11 @@ export default () =>
 
 		if (req.method === 'POST' || req.method === 'PUT')
 		{
-			p = fileDB.set(siteID, hashID, req.body)
+			p = siteDB.set(siteID, hashID, req.body)
 		}
 		else
 		{
-			p = fileDB.get(siteID, hashID)
+			p = siteDB.get(siteID, hashID)
 		}
 
 		return p
@@ -36,6 +36,7 @@ export default () =>
 				timestamp: Date.now(),
 				message: String(e),
 			}))
+			.finally(() => siteDB.stop())
 		;
 	});
 

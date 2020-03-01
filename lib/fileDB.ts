@@ -1,5 +1,7 @@
 import { resolve, join } from "path";
 import { readJSON, outputJSON } from 'fs-extra';
+import { IData, IDB, ISchema } from './types';
+import { wrapFirebaseDatabase } from 'realtime-db-adaptor';
 
 let cacheRoot = process.env.IS_REMOTE ? join('/tmp', '.cache', 'file') : resolve(__dirname, '..', '.cache', 'file');
 
@@ -22,12 +24,17 @@ function resolvePath(siteID: string, hashID: string)
 	return targetPath
 }
 
-export default {
-	async get(siteID: string, hashID: string)
+export default <IDB>{
+
+	async start() {},
+
+	async stop() {},
+
+	async get(siteID: string, hashID: string): Promise<IData>
 	{
 		return readJSON(resolvePath(siteID, hashID))
 	},
-	async set(siteID: string, hashID: string, data: any)
+	async set(siteID: string, hashID: string, data: any): Promise<IData>
 	{
 		if (!data || !data.href)
 		{
