@@ -7,11 +7,7 @@ import { wrapFirebaseDatabase, RealtimeDatabase } from "realtime-db-adaptor";
 import { assertData, assertDBKey } from './util';
 import { ISchema, IData, IDB } from './types';
 
-const app = firebase.initializeApp({
-	databaseURL: process.env.MY_DATABASE_URL,
-	apiKey: process.env.MY_API_KEY,
-});
-
+let app: firebase.app.App;
 let database: firebase.database.Database;
 let db: RealtimeDatabase<ISchema>;
 
@@ -21,6 +17,11 @@ const api = <IDB>{
 	{
 		if (!database)
 		{
+			app = firebase.initializeApp({
+				databaseURL: process.env.MY_DATABASE_URL,
+				apiKey: process.env.MY_API_KEY,
+			});
+
 			database = app.database();
 			db = wrapFirebaseDatabase<ISchema>(database);
 		}
