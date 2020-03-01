@@ -19,6 +19,7 @@
   ],
   "env": {
     "MY_DATABASE_URL": "@my_database_url",
+    "MY_API_KEY": "@my_api_key",
     "IS_REMOTE": "1",
     "VERSION": "1.0.0"
   }
