@@ -11,7 +11,7 @@ exports.default = () => {
         let { siteID, hashID } = req.params;
         let p;
         //console.log(req);
-        //console.log(req.method, req.params, req.body);
+        console.log(req.method, req.params, req.body);
         if (req.method === 'POST' || req.method === 'PUT') {
             p = db_1.default.set(siteID, hashID, req.body);
         }

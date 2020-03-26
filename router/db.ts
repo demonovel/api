@@ -14,7 +14,7 @@ export default () =>
 		let p: Promise<any>;
 
 		//console.log(req);
-		//console.log(req.method, req.params, req.body);
+		console.log(req.method, req.params, req.body);
 
 		if (req.method === 'POST' || req.method === 'PUT')
 		{

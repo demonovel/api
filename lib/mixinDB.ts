@@ -7,16 +7,16 @@ export default <IDB>{
 	async start()
 	{
 		return Promise.all([
-			firebaseDB.start && firebaseDB.start().then(e => console.error(e)),
-			fileDB.start && fileDB.start().then(e => console.error(e)),
+			firebaseDB.start && firebaseDB.start().catch(e => console.error(`db.start.firebase`, e)),
+			fileDB.start && fileDB.start().catch(e => console.error(`db.start.file`, e)),
 		])
 	},
 
 	async stop()
 	{
 		return Promise.all([
-			firebaseDB.stop && firebaseDB.stop().then(e => console.error(e)),
-			fileDB.stop && fileDB.stop().then(e => console.error(e)),
+			firebaseDB.stop && firebaseDB.stop().catch(e => console.error(`db.start.firebase`, e)),
+			fileDB.stop && fileDB.stop().catch(e => console.error(`db.start.file`, e)),
 		])
 	},
 
@@ -24,7 +24,7 @@ export default <IDB>{
 	{
 		return firebaseDB.get(siteID, hashID)
 			.catch(e => {
-				console.warn(e);
+				console.warn(`db.get`, siteID, hashID, e);
 				return fileDB.get(siteID, hashID)
 			})
 	},
@@ -32,7 +32,7 @@ export default <IDB>{
 	{
 		return firebaseDB.set(siteID, hashID, data)
 			.catch(e => {
-				console.warn(e);
+				console.warn(`db.set`, siteID, hashID, e);
 				return fileDB.set(siteID, hashID, data)
 			})
 	},

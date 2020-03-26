@@ -17,13 +17,24 @@ const api = <IDB>{
 	{
 		if (!database)
 		{
-			app = firebase.initializeApp({
+			app = await firebase.initializeApp({
 				databaseURL: process.env.MY_DATABASE_URL,
 				apiKey: process.env.MY_API_KEY,
 			});
 
-			database = app.database();
-			db = wrapFirebaseDatabase<ISchema>(database);
+			database = await app.database();
+			db = await wrapFirebaseDatabase<ISchema>(database);
+
+			/*
+			console.log({
+				databaseURL: process.env.MY_DATABASE_URL,
+				apiKey: process.env.MY_API_KEY,
+
+				app,
+				database,
+				db,
+			})
+			 */
 		}
 		await database.goOnline();
 	},

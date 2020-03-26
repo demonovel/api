@@ -86,3 +86,4 @@ jest.config.js.map
 
 .now
 !/yarn.lock
+.env
