@@ -10,16 +10,21 @@ console.dir(body.toString())
 
 let server = `http://localhost:3001`;
 //server = `https://api-file-server.now.sh`;
-server = `http://localhost:3000`;
+//server = `http://localhost:3000`;
+//server = `https://calm-inlet-73656.herokuapp.com`;
+server = `http://localhost`;
 
 Bluebird
-	.resolve(fetch(`${server}/db/file/dmzj/8daa1a0c`, {
+	.resolve(null)
+	.then(() => fetch(`${server}/db/file/dmzj/8daa1a0c`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({a: 1, b: 'Textual content'})
+		body: JSON.stringify({
+			'href': 'https://www.itread01.com/content/1545341432.html',
+		})
 	}))
 	.tap(e => e.status > 400 && Promise.reject(e))
 	.tapCatch(e => console.error(e))
