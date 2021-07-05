@@ -28,12 +28,24 @@ export default <IDB>{
 				return fileDB.get(siteID, hashID)
 			})
 	},
-	set(siteID: string, hashID: string, data: IData): Promise<IData>
+
+	async set(siteID: string, hashID: string, data: IData): Promise<IData>
 	{
-		return firebaseDB.set(siteID, hashID, data)
+		let value = await firebaseDB.set(siteID, hashID, data)
 			.catch(e => {
 				console.warn(`db.set`, siteID, hashID, e);
-				return fileDB.set(siteID, hashID, data)
 			})
+		;
+
+		let p = fileDB.set(siteID, hashID, data)
+
+		if (typeof value === 'undefined')
+		{
+			return p
+		}
+
+		p = p.catch(e => null);
+
+		return value
 	},
 }
