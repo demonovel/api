@@ -18,7 +18,7 @@ export default () =>
 				{
 					let url = new URL(data.href);
 
-					if (!url.hostname.includes('.now.sh'))
+					if (!/\.now\.sh|\.vercel\.app/i.test(url.hostname))
 					{
 						res.redirect(url.href);
 						return true;
