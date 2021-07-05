@@ -8,13 +8,13 @@ const file_1 = __importDefault(require("./router/file"));
 const db_1 = __importDefault(require("./router/db"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
-const app = express_1.default();
-app.use(cors_1.default());
-app.use(cookie_parser_1.default());
+const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
+app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use('/file/', file_1.default());
-app.use('/db/', db_1.default());
+app.use('/file/', (0, file_1.default)());
+app.use('/db/', (0, db_1.default)());
 app.use('/env', (req, res, next) => {
     let data = Object.entries(process.env)
         .reduce((a, [k, v]) => {

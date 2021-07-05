@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const db_1 = __importDefault(require("../lib/db"));
 exports.default = () => {
-    const router = express_1.Router();
+    const router = (0, express_1.Router)();
     router.all('/file/:siteID/:hashID', async (req, res, next) => {
         let { siteID, hashID } = req.params;
         let p;
