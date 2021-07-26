@@ -17,7 +17,7 @@ app.use('/env', (req, res, next) => {
 	let data = Object.entries(process.env)
 		.reduce((a, [k, v]) => {
 
-			if (!/^npm_(?:config|package|lifecycle)_/.test(k))
+			if (!/^npm_(?:config|package|lifecycle)_/i.test(k))
 			{
 				a[k] = v?.length;
 			}

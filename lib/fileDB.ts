@@ -1,7 +1,8 @@
 import { resolve, join } from "path";
 import { readJSON, outputJSON } from 'fs-extra';
-import { IData, IDB, ISchema } from './types';
+import { EnumApiType, IData, IDB, ISchema } from './types';
 import { wrapFirebaseDatabase } from 'realtime-db-adaptor';
+import { assertData, assertDBKey } from './util';
 
 let cacheRoot = process.env.IS_REMOTE ? join('/tmp', '.cache', 'file') : resolve(__dirname, '..', '.cache', 'file');
 
@@ -32,14 +33,14 @@ export default <IDB>{
 
 	async get(siteID: string, hashID: string): Promise<IData>
 	{
+		assertDBKey(siteID, hashID);
+
 		return readJSON(resolvePath(siteID, hashID))
 	},
-	async set(siteID: string, hashID: string, data: any): Promise<IData>
+	async set(siteID: string, hashID: string, data: any, type: EnumApiType): Promise<IData>
 	{
-		if (!data || !data.href)
-		{
-			return Promise.reject(new TypeError(`${JSON.stringify(data)} is not allow`));
-		}
+		assertDBKey(siteID, hashID);
+		assertData(data, type);
 
 		return outputJSON(resolvePath(siteID, hashID), data)
 			.then(e => data)

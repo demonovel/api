@@ -3,6 +3,7 @@
  */
 
 import { AssertionError } from 'assert';
+import { EnumApiType } from './types';
 
 let re = /[^a-z0-9_\-]/i;
 
@@ -21,9 +22,9 @@ export function assertDBKey(siteID: string, hashID: string)
 	}
 }
 
-export function assertData(data)
+export function assertData(data, type: EnumApiType)
 {
-	if (!data || !data.href)
+	if (!data || type !== EnumApiType.raw && !data.href)
 	{
 		throw new AssertionError({
 			message: `${JSON.stringify(data)} is not allow`,

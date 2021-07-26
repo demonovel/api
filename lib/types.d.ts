@@ -16,5 +16,9 @@ export declare interface IDB {
     start(): Promise<unknown>;
     stop(): Promise<unknown>;
     get(siteID: string, hashID: string): Promise<IData>;
-    set(siteID: string, hashID: string, data: IData): Promise<IData>;
+    set(siteID: string, hashID: string, data: IData, type: EnumApiType): Promise<IData>;
+}
+export declare enum EnumApiType {
+    file = "file",
+    raw = "raw"
 }

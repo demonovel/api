@@ -1,4 +1,4 @@
-import { IDB, IData } from './types';
+import { IDB, IData, EnumApiType } from './types';
 import firebaseDB from './firebaseDB';
 import fileDB from './fileDB';
 
@@ -29,15 +29,15 @@ export default <IDB>{
 			})
 	},
 
-	async set(siteID: string, hashID: string, data: IData): Promise<IData>
+	async set(siteID: string, hashID: string, data: IData, type: EnumApiType): Promise<IData>
 	{
-		let value = await firebaseDB.set(siteID, hashID, data)
+		let value = await firebaseDB.set(siteID, hashID, data, type)
 			.catch(e => {
 				console.warn(`db.set`, siteID, hashID, e);
 			})
 		;
 
-		let p = fileDB.set(siteID, hashID, data)
+		let p = fileDB.set(siteID, hashID, data, type)
 
 		if (typeof value === 'undefined')
 		{

@@ -2,14 +2,20 @@ import express, { Router } from 'express';
 import { readJSON } from 'fs-extra';
 import { resolve } from 'path';
 import siteDB from '../lib/db';
+import { EnumApiType } from '../lib/types';
 
 export default () =>
 {
 	const router = Router();
 
-	router.all('/file/:siteID/:hashID', async (req, res, next) =>
+	router.all('/:type/:siteID/:hashID', async (req, res, next) =>
 	{
-		let { siteID, hashID } = req.params;
+		let { siteID, hashID, type } = req.params;
+
+		if (!type || EnumApiType[type] !== type)
+		{
+			return res.sendStatus(403);
+		}
 
 		let p: Promise<any>;
 
@@ -18,7 +24,7 @@ export default () =>
 
 		if (req.method === 'POST' || req.method === 'PUT')
 		{
-			p = siteDB.set(siteID, hashID, req.body)
+			p = siteDB.set(siteID, hashID, req.body, type as EnumApiType)
 		}
 		else
 		{

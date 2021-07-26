@@ -18,7 +18,7 @@ app.use('/db/', (0, db_1.default)());
 app.use('/env', (req, res, next) => {
     let data = Object.entries(process.env)
         .reduce((a, [k, v]) => {
-        if (!/^npm_(?:config|package|lifecycle)_/.test(k)) {
+        if (!/^npm_(?:config|package|lifecycle)_/i.test(k)) {
             a[k] = v === null || v === void 0 ? void 0 : v.length;
         }
         return a;

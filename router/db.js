@@ -5,15 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const db_1 = __importDefault(require("../lib/db"));
+const types_1 = require("../lib/types");
 exports.default = () => {
     const router = (0, express_1.Router)();
-    router.all('/file/:siteID/:hashID', async (req, res, next) => {
-        let { siteID, hashID } = req.params;
+    router.all('/:type/:siteID/:hashID', async (req, res, next) => {
+        let { siteID, hashID, type } = req.params;
+        if (!type || types_1.EnumApiType[type] !== type) {
+            return res.sendStatus(403);
+        }
         let p;
         //console.log(req);
         console.log(req.method, req.params, req.body);
         if (req.method === 'POST' || req.method === 'PUT') {
-            p = db_1.default.set(siteID, hashID, req.body);
+            p = db_1.default.set(siteID, hashID, req.body, type);
         }
         else {
             p = db_1.default.get(siteID, hashID);

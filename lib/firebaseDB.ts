@@ -5,7 +5,7 @@
 import firebase from "firebase";
 import { wrapFirebaseDatabase, RealtimeDatabase } from "realtime-db-adaptor";
 import { assertData, assertDBKey } from './util';
-import { ISchema, IData, IDB } from './types';
+import { ISchema, IData, IDB, EnumApiType } from './types';
 
 let app: firebase.app.App;
 let database: firebase.database.Database;
@@ -63,10 +63,10 @@ const api = <IDB>{
 				return data
 			})
 	},
-	async set(siteID: string, hashID: string, data: IData): Promise<IData>
+	async set(siteID: string, hashID: string, data: IData, type: EnumApiType): Promise<IData>
 	{
 		assertDBKey(siteID, hashID);
-		assertData(data);
+		assertData(data, type);
 
 		await api.start();
 
